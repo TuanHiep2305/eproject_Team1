@@ -1,0 +1,5 @@
+A Category can be associated with multiple Posts.
+A User can create multiple Posts, Comments, and Feedback entries.
+An Admin can post multiple Comments and Responses.
+A Feedback entry can have multiple Responses.
+A Post can contain multiple Comments.
