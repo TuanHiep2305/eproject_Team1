@@ -6,8 +6,11 @@ if (isset($_POST['register'])) {
     $user_email = $_POST['user_email'];
     $user_nickname = $_POST['user_nickname'];
 
+    // Hash the password
+    $hashed_password = password_hash($user_password, PASSWORD_DEFAULT);
+
     $query = "INSERT INTO User (user_username, user_password, user_email, user_nickname)
-              VALUES ('$user_username', '$user_password', '$user_email', '$user_nickname')";
+              VALUES ('$user_username', '$hashed_password', '$user_email', '$user_nickname')";
     $result = $conn->query($query);
 
     if ($result == TRUE) {

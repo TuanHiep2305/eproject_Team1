@@ -2,7 +2,7 @@
 include('../include/connections.php');
 session_start();
 if (isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id']; // Use the session user_id instead of $_GET['user_id']
+    $user_id = $_SESSION['user_id']; // Use the session user_id instead of $_GET['userid']
     $query = "SELECT * FROM User WHERE user_id = '$user_id'";
     $result = $conn->query($query);
     
@@ -10,16 +10,17 @@ if (isset($_SESSION['user_id'])){
         $data = $result->fetch_assoc();
     
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $old_user_password = $_POST['old_password']; // Change the input name to 'old_password'
-            $new_user_password = $_POST['new_password']; // Change the input name to 'new_password'
-            $reentered_password = $_POST['reenter_password']; // Change the input name to 'reenter_password'
+            $old_user_password = $_POST['old_password'];
+            $new_user_password = $_POST['new_password'];
+            $reentered_password = $_POST['reenter_password'];
 
             // Check if the old password matches the one in the database
-            if ($old_user_password == $data['user_password']) {
+            if (password_verify($old_user_password, $data['user_password'])) {
                 // Check if the new password and the re-entered password match
-                if ($new_user_password == $reentered_password) {
+                if ($new_user_password === $reentered_password) {
+                    $new_hashed_password = password_hash($new_user_password, PASSWORD_DEFAULT);
                     $query_update = "UPDATE User
-                                    SET user_password = '$new_user_password'
+                                    SET user_password = '$new_hashed_password'
                                     WHERE user_id = '$user_id'";
                     $result_update = $conn->query($query_update);
 
@@ -50,15 +51,15 @@ if (isset($_SESSION['user_id'])){
     <h2>Change Password</h2>
         <div>
             <label>Old Password</label>
-            <input type="password" name="old_password"> <!-- Change the input type to 'password' -->
+            <input type="password" name="old_password">
         </div>
         <div>
             <label>New Password</label>
-            <input type="password" name='new_password'> <!-- Change the input type to 'password' -->
+            <input type="password" name='new_password'>
         </div>
         <div>
             <label>Re-Enter New Password</label>
-            <input type="password" name="reenter_password"> <!-- Change the input type to 'password' -->
+            <input type="password" name="reenter_password">
         </div>
         <button type='submit'>Change</button>
 </form>
@@ -69,7 +70,6 @@ if (isset($_SESSION['user_id'])){
     } else {
         echo 'User not found';
     }
-
 } else {
     echo 'You have to login first';
 }
