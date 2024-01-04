@@ -16,36 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `comment`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `comment`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comment` (
-  `comment_id` int NOT NULL AUTO_INCREMENT,
-  `comment_content` text,
-  `user_id` int DEFAULT NULL,
-  `post_id` int DEFAULT NULL,
-  `admin_id` int DEFAULT NULL,
-  `comment_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`comment_id`),
-  KEY `user_id` (`user_id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`),
-  CONSTRAINT `comment_ibfk_3` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `user` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `user_username` varchar(30) DEFAULT NULL,
+  `user_password` varchar(255) DEFAULT NULL,
+  `user_email` varchar(255) DEFAULT NULL,
+  `user_nickname` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `comment`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `comment` WRITE;
-/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'UserName','1234',NULL,'Anonymous'),(2,'TuanTA0809','1234','tuanta0809@gmail.com','Anh Tuấn'),(3,'nguyetdt0312','1234','nguyetdt0312@gmail.com','Nguyệt Đào'),(4,'hieptt2305','1234','hieptt2305@gmail.com','Tuấn Hiệp');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-30 10:21:23
+-- Dump completed on 2024-01-04 10:25:34

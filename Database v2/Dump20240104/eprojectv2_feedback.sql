@@ -16,33 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `response`
+-- Table structure for table `feedback`
 --
 
-DROP TABLE IF EXISTS `response`;
+DROP TABLE IF EXISTS `feedback`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `response` (
-  `response_id` int NOT NULL AUTO_INCREMENT,
-  `response_title` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `response_content` text,
-  `admin_id` int DEFAULT NULL,
-  `fb_id` int DEFAULT NULL,
-  PRIMARY KEY (`response_id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `fb_id` (`fb_id`),
-  CONSTRAINT `response_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`),
-  CONSTRAINT `response_ibfk_2` FOREIGN KEY (`fb_id`) REFERENCES `feedback` (`fb_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `feedback` (
+  `fb_id` int NOT NULL AUTO_INCREMENT,
+  `fb_title` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `fb_content` text,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`fb_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `response`
+-- Dumping data for table `feedback`
 --
 
-LOCK TABLES `response` WRITE;
-/*!40000 ALTER TABLE `response` DISABLE KEYS */;
-/*!40000 ALTER TABLE `response` ENABLE KEYS */;
+LOCK TABLES `feedback` WRITE;
+/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'Ví dụ Feedback','Đây là ví dụ về tính năng Feedback',1);
+/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-30 10:21:23
+-- Dump completed on 2024-01-04 10:25:33

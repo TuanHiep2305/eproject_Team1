@@ -72,6 +72,9 @@ CREATE TABLE Response (
 Insert into Admin
 values (default, 'hieptt2305', '1234', 'Trịnh Tuấn Hiệp');
 
+Insert into Admin
+values (default, 'vietanh', '1234', 'Nguyễn Việt Anh');
+
 INSERT INTO User (user_username, user_password, user_nickname)
 VALUES ('UserName', '1234', 'Anonymous');
 
@@ -79,3 +82,6 @@ INSERT INTO Category (category_name)
 VALUES ('Sociaty'), ('Sports'), ('Beauty'), ('Business'), ('Technology');
 
 select * from post;
+select * from user;
+select * from category;
+select * from feedback;
