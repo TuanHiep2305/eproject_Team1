@@ -4,28 +4,28 @@ USE eprojectv2;
 -- Create Tables
 CREATE TABLE Category (
   category_id INT PRIMARY KEY AUTO_INCREMENT,
-  category_name VARCHAR(30)
+  category_name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Admin (
   admin_id INT PRIMARY KEY AUTO_INCREMENT,
-  admin_username VARCHAR(30),
-  admin_password VARCHAR(255),
-  admin_nickname NVARCHAR(100)
+  admin_username VARCHAR(30) NOT NULL,
+  admin_password VARCHAR(255) NOT NULL,
+  admin_nickname NVARCHAR(100) NOT NULL
 );
 
 CREATE TABLE User (
   user_id INT PRIMARY KEY AUTO_INCREMENT,
-  user_username VARCHAR(30),
-  user_password VARCHAR(255),
-  user_email VARCHAR(255),
-  user_nickname NVARCHAR(100)
+  user_username VARCHAR(30) NOT NULL,
+  user_password VARCHAR(255) NOT NULL,
+  user_email VARCHAR(255) NOT NULL,
+  user_nickname NVARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Post (
   post_id INT PRIMARY KEY AUTO_INCREMENT,
-  post_title NVARCHAR(255),
-  post_content TEXT,
+  post_title NVARCHAR(255) NOT NULL,
+  post_content TEXT NOT NULL,
   post_image VARCHAR(255),
   upload_date DATETIME DEFAULT NOW(),
   category_id INT,
@@ -40,7 +40,7 @@ CREATE TABLE Post (
 
 CREATE TABLE Comment (
   comment_id INT PRIMARY KEY AUTO_INCREMENT,
-  comment_content TEXT,
+  comment_content TEXT NOT NULL,
   user_id INT,
   post_id INT,
   admin_id INT,
@@ -52,16 +52,16 @@ CREATE TABLE Comment (
 
 CREATE TABLE Feedback (
   fb_id INT PRIMARY KEY AUTO_INCREMENT,
-  fb_title NVARCHAR(100),
-  fb_content TEXT,
+  fb_title NVARCHAR(255) NOT NULL,
+  fb_content TEXT NOT NULL,
   user_id INT,
   FOREIGN KEY (user_id) REFERENCES User(user_id)
 );
 
 CREATE TABLE Response (
   response_id INT PRIMARY KEY AUTO_INCREMENT,
-  response_title NVARCHAR(100),
-  response_content TEXT,
+  response_title NVARCHAR(255) NOT NULL,
+  response_content TEXT NOT NULL,
   admin_id INT,
   fb_id INT,
   FOREIGN KEY (admin_id) REFERENCES Admin(admin_id),
@@ -81,7 +81,6 @@ VALUES ('UserName', '1234', 'Anonymous');
 INSERT INTO Category (category_name)
 VALUES ('Sociaty'), ('Sports'), ('Beauty'), ('Business'), ('Technology');
 
-select * from post;
-select * from user;
-select * from category;
-select * from feedback;
+INSERT INTO Category (category_name)
+VALUES ('Today in World');
+
