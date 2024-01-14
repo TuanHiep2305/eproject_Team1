@@ -1,0 +1,65 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    padding: 10px 0;
+}
+
+.navbar img {
+    max-width: 100px;
+}
+
+.login-options,
+.table-selector {
+    display: none;
+}
+
+.login-name {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.col-md-4 {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.card-img-top {
+    width: 414px;
+    height: 276px;
+    object-fit: cover;
+
+}
+
+.card-body {
+    position: relative;
+    width: 414px;
+    height: 214px;
+}
+
+.card-button {
+
+    /* margin: 0 10px; */
+    /* display: inline-block; */
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 1rem;
+}
+
+.card-button a {
+    margin-right: 10px;
+}
+
+.card {
+    width: 416px;
+    height: 492px !important;
+}
