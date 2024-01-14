@@ -26,20 +26,21 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <form action="" method='POST'>
-        <h2>Admin Login</h2>
-        <div>
-            <label for="">Username</label>
-            <input type="text" name='admin_username'>
+<body class="container mt-5">
+    <form action="" method='POST' class="col-md-6 offset-md-3 bg-light p-4">
+        <h2 class="mb-4">Admin Login</h2>
+        <div class="form-group">
+            <label for="admin_username">Username</label>
+            <input type="text" name='admin_username' class="form-control">
         </div>
-        <div>
-            <label for="">Password</label>
-            <input type="password" name='admin_password'>
+        <div class="form-group">
+            <label for="admin_password">Password</label>
+            <input type="password" name='admin_password' class="form-control">
         </div>
-        <button type='submit' name='login'>Login</button>
+        <button type='submit' name='login' class="btn btn-primary">Login</button>
     </form>
 </body>
 </html>

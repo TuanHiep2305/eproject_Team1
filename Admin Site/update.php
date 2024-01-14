@@ -5,7 +5,7 @@ if (isset($_SESSION['admin_id'])){
     $post_id = $_GET['post_id'];
     $query = "SELECT * FROM Post 
                        JOIN Category ON Post.category_id = Category.category_id 
-                       JOIN Admin ON Admin.admin_id = Post.admin_id
+
                        WHERE post_id = '$post_id'";
     $result = $conn->query($query);
     
@@ -20,7 +20,7 @@ if (isset($_SESSION['admin_id'])){
             
             $query_update = "UPDATE Post
                             JOIN Category ON Post.category_id = Category.category_id 
-                            JOIN Admin ON Admin.admin_id = Post.admin_id
+
                             SET Post.post_title = '$new_post_title', 
                                 Post.post_content = '$new_post_content',
                                 Post.post_image = '$new_post_image',
@@ -30,38 +30,47 @@ if (isset($_SESSION['admin_id'])){
 
             //Check update result
             if ($result_update) {
-                echo "Updated successfully";
+                $update_message = "Updated successfully";
             } else {
-                echo "Update failed: " . $conn->error;
+                $update_message = "Update failed: " . $conn->error;
             }
         }
 ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Post</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+    <a class="btn btn-info" href="home.php">Home</a>
     <form method='POST'>
         <h2>Update Post</h2>
-            <div>
-                <label>Title</label>
-                <input type="text" name="post_title" value='<?php echo $data['post_title']; ?>'>
-            </div>
-            <div>
-                <label>Content</label>
-                <textarea name="post_content" value='<?php echo $data['post_content']; ?>' cols="50" rows="10"><?php echo $data['post_content']; ?></textarea>
-            </div>
-            <div>
-                <label>Image</label>
-                <img src="<?php echo $data['post_image']; ?>" width="20%">
-                <input type="text" name="post_image" value="<?php echo $data['post_image']; ?>">
-            </div>
-            <div>
-                <select name="post_category">
+        <?php if (!empty($update_message)): ?>
+        <div class="alert alert-<?php echo ($update_message == "Updated successfully") ? 'success' : 'danger'; ?> mb-3">
+            <?php echo $update_message; ?>
+        </div>
+    <?php endif; ?>
+        <div class="form-group">
+            <label for="post_title">Title</label>
+            <input type="text" class="form-control" name="post_title" value='<?php echo $data['post_title']; ?>'>
+        </div>
+        <div class="form-group">
+            <label for="post_content">Content</label>
+            <textarea class="form-control" name="post_content" cols="50" rows="10"><?php echo $data['post_content']; ?></textarea>
+        </div>
+        <div class="form-group">
+            <label for="post_image">Image</label>
+            <img src="<?php echo $data['post_image']; ?>" class="img-fluid" alt="Post Image" width="20%">
+            <input type="text" class="form-control" name="post_image" value="<?php echo $data['post_image']; ?>">
+        </div>
+        <div class="form-group">
+            <label for="post_category">Category</label>
+            <select class="form-control" name="post_category">
                 <?php
                 $categories_query = "SELECT category_id, category_name FROM Category";
                 $categories_result = $conn->query($categories_query);
@@ -76,13 +85,12 @@ if (isset($_SESSION['admin_id'])){
                     }
                 }
                 ?>
-                </select>
-            </div>
-            <button type='submit'>Update</button>
+            </select>
+        </div>
+        <button type='submit' class="btn btn-primary">Update</button>
     </form>
-        <a href="home.php">Return</a>
-    </body>
-    </html>
+</body>
+</html>
 
 <?php
     }else {
@@ -94,4 +102,3 @@ if (isset($_SESSION['admin_id'])){
 }
 ?>
 
-<a href="home.php">Home</a>
